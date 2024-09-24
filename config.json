@@ -1,0 +1,18 @@
+{
+ "Entries": [
+  {
+   "Keys": [
+    "d"
+   ],
+   "Name": "Duolingo",
+   "URL": "https://www.duolingo.com"
+  },
+  {
+   "Keys": [
+    "s"
+   ],
+   "Name": "DuckDuckGo",
+   "URL": "https://duckduckgo.com/"
+  }
+ ]
+}

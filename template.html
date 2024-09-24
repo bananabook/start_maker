@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Φ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #222;
+            color: white;
+        }
+        a{
+          color: #d00;
+        }
+        .container {
+            text-align: left;
+        }
+        h1 {
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {{range .Entries}}<p id="message">{{range .Keys}}{{.|toup}} {{end}}<a href={{.URL}}>{{.Name}}</a></p>
+    {{end}}
+    </div>
+    <script>
+        document.addEventListener('keydown', function(event) {
+          function openNewBackgroundTab(input){
+              var a = document.createElement("a");
+              a.href = input;
+              var evt = document.createEvent("MouseEvents");
+              evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0,
+                                          true, false, false, false, 0, null);//the tenth parameter of initMouseEvent sets ctrl key
+              a.dispatchEvent(evt);
+          } 
+          {{range .Entries}}if ( {{range $i,$v:=.Keys}}{{if $i}} || {{end}}event.key === '{{tolow $v}}'{{end}} ) {
+            openNewBackgroundTab({{.URL}})
+          }{{end}}
+          {{range .Entries}}if ( {{range $i,$v:=.Keys}}{{if $i}} || {{end}}event.key === '{{toup $v}}'{{end}} ) {
+            window.location.replace({{.URL}})
+          }{{end}}
+        });
+    </script>
+</body>
+</html>
