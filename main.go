@@ -19,7 +19,11 @@ type Data struct{
 	Entries []Entry
 }
 func main() {
-	data,_:=readData("config.json")
+	data,e:=readData("config.json")
+	if e!=nil{
+		log.Println(e)
+		return
+	}
 	//Augment(&data)
 	UseTemplate(data)
 }
@@ -54,7 +58,10 @@ func readData(filename string)(Data,error){
 	}
 	defer f.Close()
 	data:=Data{}
-	json.NewDecoder(f).Decode(&data)
+	e=json.NewDecoder(f).Decode(&data)
+	if e!=nil{
+		return Data{}, e
+	}
 	return data,nil
 }
 func UseTemplate(data Data){
