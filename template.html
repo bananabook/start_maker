@@ -18,18 +18,35 @@
         a{
           color: #d00;
         }
+        p{
+          margin:16px;
+        }
         .container {
             text-align: left;
         }
         h1 {
             font-size: 2em;
         }
+        .left{
+          text-align:center;
+        }
+        td{
+          padding-bottom:10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        {{range .Entries}}<p id="message">{{range .Keys}}{{.|toup}} {{end}}<a href={{.URL}}>{{.Name}}</a></p>
-    {{end}}
+    <table>
+        <tbody>
+        {{range .Entries}}
+            <tr>
+                <td class="left">{{range .Keys}}{{.|toup}} {{end}}</td>
+                <td><a href={{.URL}}>{{.Name}}</a></td>
+            </tr>
+        {{end}}
+        </tbody>
+    </table>
     </div>
     <script>
         document.addEventListener('keydown', function(event) {
